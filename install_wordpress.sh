@@ -23,13 +23,7 @@ sudo systemctl enable mariadb
 echo -e "\n"Y"\n"test"\n"test"\n"Y"\n"Y"\n"Y"\n"Y|sudo mysql_secure_installation # パスワードは「test」で、Yes/Noの質問はYesを選択
 
 ## MariaDBへの接続とWordPress用のデータベースとユーザを作成
-mysql -u root -ptest <<EOS
-CREATE USER 'wordpress-user'@'localhost' IDENTIFIED BY 'password';
-CREATE DATABASE `wordpress-db`;
-GRANT ALL PRIVILEGES ON `wordpress-db`.* TO "wordpress-user"@"localhost";
-FLUSH PRIVILEGES;
-exit
-EOS
+mysql -u root -ptest -e "CREATE USER 'wordpress-user'@'localhost' IDENTIFIED BY 'password'; CREATE DATABASE `wordpress-db`; GRANT ALL PRIVILEGES ON `wordpress-db`.* TO "wordpress-user"@"localhost"; FLUSH PRIVILEGES;"
 
 # 4.Wordpressのインストール
 ## ホームディレクトリへ移動
